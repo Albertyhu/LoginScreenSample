@@ -16,6 +16,11 @@ import Account from './screens/Account.js';
 import Bookmark from './screens/Bookmark.js';
 import Settings from './screens/Settings.js';
 import Profile from './screens/Profile.js';
+import AccountTabScreen from './screens/AccountTabScreen.js';
+import BookmarkTabScreen from './screens/BookmarksTabScreen.js';
+import SupportTabScreen from './screens/SupportTabScreen.js';
+import SettingsTabScreen from './screens/SettingsTabScreen.js';
+import ProfileTabScreen from './screens/ProfileTabScreen.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -49,11 +54,11 @@ export default function App() {
         <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
   {/*   the name of the home screen can no longer be home or else the home link on the drawer doesn't work*/}
             <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
-            <Drawer.Screen name = "Support" component ={Support} />
-            <Drawer.Screen name = "Settings" component ={Settings} />
-            <Drawer.Screen name = "Account" component ={Account} />
-            <Drawer.Screen name = "Profile" component ={Profile} />
-            <Drawer.Screen name = "Bookmark" component ={Bookmark} />
+            <Drawer.Screen name = "Support" component ={SupportTabScreen} />
+            <Drawer.Screen name = "Settings" component ={SettingsTabScreen} />
+            <Drawer.Screen name = "Account" component ={AccountTabScreen} />
+            <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
+            <Drawer.Screen name = "Bookmark" component ={BookmarkTabScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
   );

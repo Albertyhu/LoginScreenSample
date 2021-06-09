@@ -107,17 +107,17 @@ return(
                               label="Support"
                               onPress = {() => {props.navigation.navigate('Support')}}
                         />
-                       <DrawerItem
-                            icon={({color, size}) => (
-                                <Icon
-                                    name='exit-to-app'
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                              label="Sign Out"
-                              onPress = {() => {}}
-                        />
+                   <DrawerItem
+                        icon={({color, size}) => (
+                            <Icon
+                                name='exit-to-app'
+                                color={color}
+                                size={size}
+                            />
+                        )}
+                          label="Sign Out"
+                          onPress = {() => {}}
+                    />
                 </Drawer.Section>
                 <Drawer.Section title="Preferences">
                     <TouchableRipple onPress = {() => {toggleTheme()}}>
