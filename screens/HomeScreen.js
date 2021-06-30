@@ -40,11 +40,6 @@ export default class HomeScreen extends React.Component {
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>HomeScreen</Text>
-        {this.state.users.map((user) => (
-          <Text key={user.email}>{user.email}</Text>
-        ))}
-        <Button title = 'Sign In' onPress = {() => this.props.navigation.navigate('Sign In')} />
-        <Button title = 'Menu' onPress = {() => {this.props.navigation.openDrawer()}} />
       </View>
 
     );

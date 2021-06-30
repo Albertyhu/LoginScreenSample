@@ -10,7 +10,8 @@ import {
     Drawer,
     Text,
     TouchableRipple,
-    Switch
+    Switch,
+    useTheme,
 } from 'react-native-paper';
 
 import Home from './HomeScreen.js';
@@ -19,12 +20,13 @@ import Bookmark from './Bookmark.js';
 import Settings from './Settings.js';
 import Support from './Support.js';
 import Profile from './Profile.js';
+import { AuthContext } from '../components/AuthContext.js';
 
 export function DrawerContent(props) {
-const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-const toggleTheme = () =>{
-    setIsDarkTheme(!isDarkTheme);
-}
+const { signOut } = React.useContext(AuthContext);
+const { toggleTheme } = React.useContext(AuthContext);
+const PaperTheme = useTheme();
+
 return(
     <View>
         <DrawerContentScrollView {...props} >
@@ -41,13 +43,13 @@ return(
                         </View>
                     </View>
                     <View style = {styles.row}>
-                        <View>
+                        <View style = {styles.row}>
                             <Paragraph style = {styles.paragraph, styles.caption}>80</Paragraph>
-                            <Caption style ={styles.caption}>Following</Caption>
+                            <Caption style ={styles.caption, {marginLeft: 5}}>Following</Caption>
                         </View>
-                        <View>
+                        <View style = {[styles.row, {marginLeft: 10,}]}>
                             <Paragraph style = {styles.paragraph, styles.caption}>100</Paragraph>
-                            <Caption style ={styles.caption}>Followers</Caption>
+                            <Caption style ={styles.caption, {marginLeft: 5}}>Followers</Caption>
                         </View>
                     </View>
                 </View>
@@ -107,24 +109,24 @@ return(
                               label="Support"
                               onPress = {() => {props.navigation.navigate('Support')}}
                         />
-                       <DrawerItem
-                            icon={({color, size}) => (
-                                <Icon
-                                    name='exit-to-app'
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                              label="Sign Out"
-                              onPress = {() => {}}
-                        />
+                   <DrawerItem
+                        icon={({color, size}) => (
+                            <Icon
+                                name='exit-to-app'
+                                color={color}
+                                size={size}
+                            />
+                        )}
+                          label="Sign Out"
+                          onPress = {() => {signOut()}}
+                    />
                 </Drawer.Section>
                 <Drawer.Section title="Preferences">
-                    <TouchableRipple onPress = {() => {toggleTheme()}}>
+                    <TouchableRipple onPress = {toggleTheme}>
                         <View style = {styles.preference}>
                             <Text>Dark Theme</Text>
                             <View pointerEvents='none'>
-                                <Switch value = {isDarkTheme} />
+                                <Switch value = {PaperTheme.dark} />
                             </View>
                         </View>
                     </TouchableRipple>
