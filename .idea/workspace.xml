@@ -16,7 +16,15 @@
     <list default="true" id="949ad232-8cf8-45ed-b19b-46e833fc32d5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/DrawerContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/DrawerContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/MainTabScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/MainTabScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/RootStackScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/RootStackScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/SettingsTabScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SettingsTabScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/SplashScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SplashScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +44,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/screens" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="Console" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -68,13 +76,37 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2771" y="167" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624477260793">
+      <screen x="2400" y="0" width="1680" height="1010" />
+    </state>
+    <state x="2771" y="167" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/2400.0.1680.1010@2400.0.1680.1010" timestamp="1624477260793" />
+    <state x="368" y="112" width="800" height="600" key="#com.intellij.featureStatistics.actions.ShowFeatureUsageStatisticsDialog" timestamp="1624486974201">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="368" y="112" width="800" height="600" key="#com.intellij.featureStatistics.actions.ShowFeatureUsageStatisticsDialog/0.0.1536.824/2400.0.1680.1010@0.0.1536.824" timestamp="1624486974201" />
     <state x="3056" y="270" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1622585234032">
       <screen x="2400" y="0" width="1680" height="1010" />
     </state>
     <state x="3056" y="270" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/2400.0.1680.1010@2400.0.1680.1010" timestamp="1622585234032" />
-    <state x="2986" y="207" width="672" height="678" key="search.everywhere.popup" timestamp="1622768406385">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1624486977792">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/2400.0.1680.1010@0.0.1536.824" timestamp="1624486977792" />
+    <state x="3088" y="222" key="RollbackChangesDialog" timestamp="1624131910639">
       <screen x="2400" y="0" width="1680" height="1010" />
     </state>
-    <state x="2986" y="207" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/2400.0.1680.1010@2400.0.1680.1010" timestamp="1622768406385" />
+    <state x="3088" y="222" key="RollbackChangesDialog/0.0.1536.824/2400.0.1680.1010@2400.0.1680.1010" timestamp="1624131910639" />
+    <state x="2847" y="160" key="SettingsEditor" timestamp="1623793094313">
+      <screen x="2400" y="0" width="1680" height="1010" />
+    </state>
+    <state x="2847" y="160" key="SettingsEditor/0.0.1536.824/2400.0.1680.1010@2400.0.1680.1010" timestamp="1623793094313" />
+    <state x="3101" y="415" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1623443624082">
+      <screen x="2400" y="0" width="1680" height="1010" />
+    </state>
+    <state x="3101" y="415" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824/2400.0.1680.1010@2400.0.1680.1010" timestamp="1623443624082" />
+    <state x="2986" y="207" width="672" height="678" key="search.everywhere.popup" timestamp="1623793069055">
+      <screen x="2400" y="0" width="1680" height="1010" />
+    </state>
+    <state x="2986" y="207" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/2400.0.1680.1010@2400.0.1680.1010" timestamp="1623793069055" />
   </component>
 </project>

@@ -5,6 +5,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useTheme as usePaperTheme } from 'react-native-paper';
+import {useTheme as useNavTheme} from '@react-navigation/native';
 
 import Home from './HomeScreen.js';
 import LoginScreen from './LoginScreen.js';
@@ -33,6 +35,10 @@ const SupportStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () =>{
+
+const { colors } = useNavTheme();
+const PaperTheme = usePaperTheme();
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -221,5 +227,23 @@ return(
        headerLeft: () => (<Icon.Button name = 'ios-menu' size = {25} backgroundColor =  '#24cb29' onPress = {() => (navigation.openDrawer())} />)
     }}/>
 </AccountStack.Navigator>
+)
+}
+
+export const SettingsStackScreen = ({navigation}) => {
+return(
+<SettingsStack.navigator screenOptions = {{
+    headerStyle:{
+        backgroundColor: '#24cb29',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle:{
+        fontWeight: 'bold',
+    },
+}}>
+    <SettingsStack.Screen name = "Settings" component = {Settings} options = {{
+    headerLeft: () =>(<Icon.Button name = 'ios-menu' size = {25} backgroundColor = '#24cb29' onPress = {()=> navigation.openDrawer()} />)
+    }} />
+</SettingsStack.navigator>
 )
 }

@@ -17,6 +17,7 @@ import Bookmark from './Bookmark.js';
 import Settings from './Settings.js';
 import Support from './Support.js';
 import Profile from './Profile.js';
+import SettingsDrawer from './SettingsDrawer.js';
 
 const HomeStack = createStackNavigator();
 const LoginStack = createStackNavigator();
@@ -35,7 +36,7 @@ const Tab = createMaterialBottomTabNavigator();
 const SettingsTabScreen = () =>{
   return (
     <Tab.Navigator
-      initialRouteName="Settings"
+      initialRouteName="SettingsDrawer"
       activeColor="#fff"
       barStyle={{ backgroundColor: 'tomato' }}
     >
