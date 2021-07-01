@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useMemo} from 'react';
 import { StyleSheet, Text, View, useState, ActivityIndicator } from 'react-native';
-import { NavigationContainer, useNavigation, DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
+import { NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createDrawerNavigator, openDrawer, toggleDrawer } from '@react-navigation/drawer';
 import { DrawerContent } from './screens/DrawerContent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DefaultTheme as PaperDefaultTheme, DarkTheme as PaperDarkTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import Home from './screens/HomeScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
@@ -34,35 +33,12 @@ export default function App() {
 //const [ isLoading, setIsLoading] = React.useState(true);
 //const [ userToken, setUserToken ] = React.useState(null);
 
-const CustomDefaultTheme = {
-    ...NavigationDefaultTheme,
-    ...PaperDefaultTheme,
-    colors:{
-        ...NavigationDefaultTheme.colors,
-        ...PaperDefaultTheme.colors,
-        background: '#ffffff',
-        text: '#333333'
-    },
-}
-
-const CustomDarkTheme = {
-    ...NavigationDarkTheme,
-    ...PaperDarkTheme,
-    colors:{
-        ...NavigationDarkTheme.colors,
-        ...PaperDarkTheme.colors,
-        background: '#333333',
-        text: '#ffffff',
-    }
-}
-
-const [ theme, setTheme ] = React.useState(true);
-const CurrentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLoginState = {
 isLoading: true,
 userName: null,
 userToken: null,
+password: '',
 }
 
 //reducer
@@ -80,6 +56,7 @@ const loginReducer = (prevState, action) =>{
                 userName: action.id,
                 userToken: action.token,
                 isLoading: false,
+                password: action.pass,
             };
         case 'LOGOUT':
             return{
@@ -102,23 +79,15 @@ const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState)
 
 //any line that is commented out in this block of code means that it once had a purpose, but is now obsolete
 const authContext = React.useMemo(() =>({
-signIn: async (username, password) => {
-   // setUserToken('asdf');
-    //setIsLoading(false);
-    let userToken;
-    //userName = null;
-    if( username == 'user' && password == 'pass' ){
-        userToken = 'asdf';
-    }
-    else
-        userToken = null;
+signIn: async (foundUser) => {
 
+    let userToken = foundUser.userToken;
     try{
         await AsyncStorage.setItem('userToken', userToken)
     } catch (e){
         alert(e)
     }
-    dispatch ({type: 'LOGIN', id: username, token: userToken, });
+    dispatch ({type: 'LOGIN', id: foundUser.username, token: userToken, pass: foundUser.password });
 },
 signOut: async () =>{
 //    setUserToken(null);
@@ -135,9 +104,7 @@ signUp: () =>{
 //    setUserToken('asdf');
     setIsLoading(false);
 },
-toggleTheme: ()=>{
-    setTheme(theme => !theme)
-}
+
 
 }),[]);
 //you put the empty array in the end of useMemo so this whole block of code doesn't have to run everytime
@@ -165,24 +132,22 @@ return(
 }
 
   return (
-   <PaperProvider theme = {CurrentTheme}>
-     <AuthContext.Provider value = {authContext}>
-          <NavigationContainer theme = {CurrentTheme}>
-              {loginState.userToken !== null ?
-                  <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
-                     <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
-                     <Drawer.Screen name = "Support" component ={SupportTabScreen} />
-                     <Drawer.Screen name = "Settings" component ={SettingsTabScreen} />
-                     <Drawer.Screen name = "Account" component ={AccountTabScreen} />
-                     <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
-                     <Drawer.Screen name = "Bookmark" component ={BookmarkTabScreen} />
-                  </Drawer.Navigator>
-                  :
-                  <RootStackScreen />
-               }
-          </NavigationContainer>
-    </AuthContext.Provider>
-  </PaperProvider>
+ <AuthContext.Provider value = {authContext}>
+      <NavigationContainer>
+          {loginState.userToken !== null ?
+              <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
+                 <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
+                 <Drawer.Screen name = "Support" component ={SupportTabScreen} />
+                 <Drawer.Screen name = "Settings" component ={SettingsTabScreen} />
+                 <Drawer.Screen name = "Account" component ={AccountTabScreen} />
+                 <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
+                 <Drawer.Screen name = "Bookmark" component ={BookmarkTabScreen} />
+              </Drawer.Navigator>
+              :
+              <RootStackScreen />
+           }
+      </NavigationContainer>
+</AuthContext.Provider>
   );
 }
 
