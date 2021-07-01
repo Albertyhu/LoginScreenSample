@@ -63,6 +63,7 @@ const initialLoginState = {
 isLoading: true,
 userName: null,
 userToken: null,
+password: '',
 }
 
 //reducer
@@ -80,6 +81,7 @@ const loginReducer = (prevState, action) =>{
                 userName: action.id,
                 userToken: action.token,
                 isLoading: false,
+                password: action.pass,
             };
         case 'LOGOUT':
             return{
@@ -102,23 +104,15 @@ const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState)
 
 //any line that is commented out in this block of code means that it once had a purpose, but is now obsolete
 const authContext = React.useMemo(() =>({
-signIn: async (username, password) => {
-   // setUserToken('asdf');
-    //setIsLoading(false);
-    let userToken;
-    //userName = null;
-    if( username == 'user' && password == 'pass' ){
-        userToken = 'asdf';
-    }
-    else
-        userToken = null;
+signIn: async (foundUser) => {
 
+    let userToken = foundUser.userToken;
     try{
         await AsyncStorage.setItem('userToken', userToken)
     } catch (e){
         alert(e)
     }
-    dispatch ({type: 'LOGIN', id: username, token: userToken, });
+    dispatch ({type: 'LOGIN', id: foundUser.username, token: userToken, pass: foundUser.password });
 },
 signOut: async () =>{
 //    setUserToken(null);
