@@ -120,11 +120,11 @@ return(
                     />
                 </Drawer.Section>
                 <Drawer.Section title="Preferences">
-                    <TouchableRipple onPress = {}>
+                    <TouchableRipple onPress = ''>
                         <View style = {styles.preference}>
                             <Text>Dark Theme</Text>
                             <View pointerEvents='none'>
-                                <Switch value = {} />
+                                <Switch value = '' />
                             </View>
                         </View>
                     </TouchableRipple>

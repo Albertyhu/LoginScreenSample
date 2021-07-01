@@ -132,24 +132,22 @@ return(
 }
 
   return (
-   <PaperProvider theme = {CurrentTheme}>
-     <AuthContext.Provider value = {authContext}>
-          <NavigationContainer theme = {CurrentTheme}>
-              {loginState.userToken !== null ?
-                  <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
-                     <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
-                     <Drawer.Screen name = "Support" component ={SupportTabScreen} />
-                     <Drawer.Screen name = "Settings" component ={SettingsTabScreen} />
-                     <Drawer.Screen name = "Account" component ={AccountTabScreen} />
-                     <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
-                     <Drawer.Screen name = "Bookmark" component ={BookmarkTabScreen} />
-                  </Drawer.Navigator>
-                  :
-                  <RootStackScreen />
-               }
-          </NavigationContainer>
-    </AuthContext.Provider>
-  </PaperProvider>
+ <AuthContext.Provider value = {authContext}>
+      <NavigationContainer>
+          {loginState.userToken !== null ?
+              <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
+                 <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
+                 <Drawer.Screen name = "Support" component ={SupportTabScreen} />
+                 <Drawer.Screen name = "Settings" component ={SettingsTabScreen} />
+                 <Drawer.Screen name = "Account" component ={AccountTabScreen} />
+                 <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
+                 <Drawer.Screen name = "Bookmark" component ={BookmarkTabScreen} />
+              </Drawer.Navigator>
+              :
+              <RootStackScreen />
+           }
+      </NavigationContainer>
+</AuthContext.Provider>
   );
 }
 
