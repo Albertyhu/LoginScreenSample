@@ -14,13 +14,7 @@ import ProfileScreen from './Profile.js';
 import AboutScreen from './About.js';
 import Account from './Account.js';
 import Profile from './Profile.js';
-
-const HomeStack = createStackNavigator();
-const DetailStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
-const AboutStack = createStackNavigator();
-const AccountStack = createStackNavigator();
-
+import { HomeStackScreen, DetailsStackScreen, ProfileStackScreen, AboutStackScreen, AccountStackScreen } from './MainTabScreen.js';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -59,7 +53,7 @@ const { colors } = useNavTheme();
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="About"
       activeColor="#fff"
       inactiveColor = {inactiveIconColor()}
       barStyle={{ backgroundColor: 'tomato' }}
@@ -124,91 +118,3 @@ const { colors } = useNavTheme();
 }
 
 export default MainTabScreen;
-
-export const HomeStackScreen = ({navigation}) =>{
-return(
- <HomeStack.Navigator screenOptions = {{
-    headerStyle: {
-        backgroundColor: HomeBarColor(),
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-        fontWeight: 'bold',
-    }
- }}>
-        <HomeStack.Screen name = "Home" component ={Home} options= {{headerLeft: () => (
-        <Icon.Button name='ios-menu' size = {25} backgroundColor= {HomeBarColor()} onPress = {() => navigation.openDrawer()} />)}}/>
-    </HomeStack.Navigator>
-)
-}
-
-export const DetailsStackScreen = ({navigation}) =>{
-return(
-<DetailStack.Navigator screenOptions = {{
-    headerStyle: {
-            backgroundColor: DetailsBarColor(),
-        },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-        fontWeight: 'bold',
-    }
-}}>
-    <DetailStack.Screen name = "Details" component = {DetailScreen} options = {{title: "Details",
-    headerLeft: () => (<Icon.Button name="ios-menu" size={25} backgroundColor={DetailsBarColor()} onPress = {() => navigation.openDrawer()} />)
-    }}/>
-</DetailStack.Navigator>
-)
-}
-
-export const ProfileStackScreen = ({navigation}) =>{
-return(
-<ProfileStack.Navigator screenOptions = {{
-    headerStyle: {
-     backgroundColor: ProfileBarColor(),
-        },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-        fontWeight: 'bold',
-    }
-}}>
-    <ProfileStack.Screen name = 'Profile' component = {ProfileScreen}
-    options = {{headerLeft: () => (<Icon.Button name= 'ios-menu' size = {25} backgroundColor={ProfileBarColor()} onPress = {() => navigation.openDrawer()} />)}} />
-</ProfileStack.Navigator>
-)
-}
-
-export const AboutStackScreen = ({navigation}) =>{
-return(
-<AboutStack.Navigator screenOptions = {{
-    headerStyle:{
-        backgroundColor: AboutBarColor(),
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle:{
-        fontWeight: 'bold',
-    },
-}}>
-    <AboutStack.Screen name = 'About Us' component = {AboutScreen} options = {{
-       headerLeft: () => (<Icon.Button name = 'ios-menu' size = {25} backgroundColor = {AboutBarColor()} onPress = {() => (navigation.openDrawer())} />)
-    }}/>
-</AboutStack.Navigator>
-)
-}
-
-export const AccountStackScreen = ({navigation}) =>{
-return(
-<AccountStack.Navigator screenOptions = {{
-    headerStyle:{
-        backgroundColor: AccountBarColor(),
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle:{
-        fontWeight: 'bold',
-    },
-}}>
-    <AccountStack.Screen name = 'Account' component = {Account} options = {{
-       headerLeft: () => (<Icon.Button name = 'ios-menu' size = {25} backgroundColor = {AccountBarColor()} onPress = {() => (navigation.openDrawer())} />)
-    }}/>
-</AccountStack.Navigator>
-)
-}

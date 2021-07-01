@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useMemo} from 'react';
 import { StyleSheet, Text, View, useState, ActivityIndicator } from 'react-native';
-import { NavigationContainer, useNavigation} from '@react-navigation/native';
+import { NavigationContainer, useNavigation, DefaultTheme as NavDefaultTheme, DarkTheme as NavDarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createDrawerNavigator, openDrawer, toggleDrawer } from '@react-navigation/drawer';
 import { DrawerContent } from './screens/DrawerContent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DefaultTheme as PaperDefaultTheme, DarkTheme as PaperDarkTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import Home from './screens/HomeScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
@@ -16,10 +17,9 @@ import Account from './screens/Account.js';
 import Bookmark from './screens/Bookmark.js';
 import Settings from './screens/Settings.js';
 import Profile from './screens/Profile.js';
+import DetailsTabScreen from './screens/DetailsTabScreen.js';
+import AboutTabScreen from './screens/AboutTabScreen.js';
 import AccountTabScreen from './screens/AccountTabScreen.js';
-import BookmarkTabScreen from './screens/BookmarksTabScreen.js';
-import SupportTabScreen from './screens/SupportTabScreen.js';
-import SettingsTabScreen from './screens/SettingsTabScreen.js';
 import ProfileTabScreen from './screens/ProfileTabScreen.js';
 import RootStackScreen from './screens/RootStackScreen.js';
 import { AuthContext } from './components/AuthContext.js';
@@ -33,6 +33,32 @@ export default function App() {
 //const [ isLoading, setIsLoading] = React.useState(true);
 //const [ userToken, setUserToken ] = React.useState(null);
 
+const CustomDefaultTheme = {
+    ...NavDefaultTheme,
+    ...PaperDefaultTheme,
+    colors:{
+        ...NavDefaultTheme.colors,
+        ...PaperDefaultTheme.colors,
+        background: '#FFFFFF',
+        text: '#333333',
+    },
+}
+
+const CustomDarkTheme = {
+    ...NavDarkTheme,
+    ...PaperDarkTheme,
+    colors:{
+        ...NavDarkTheme.colors,
+        ...PaperDarkTheme.colors,
+        background: '#333333',
+        text: '#ffffff',
+        bar: '#000000',
+    },
+}
+
+const [ theme, setTheme ] = React.useState(true);
+
+const CurrentTheme = theme? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLoginState = {
 isLoading: true,
@@ -104,7 +130,9 @@ signUp: () =>{
 //    setUserToken('asdf');
     setIsLoading(false);
 },
-
+toggleTheme: ()=>{
+    setTheme(theme => !theme)
+},
 
 }),[]);
 //you put the empty array in the end of useMemo so this whole block of code doesn't have to run everytime
@@ -132,22 +160,23 @@ return(
 }
 
   return (
- <AuthContext.Provider value = {authContext}>
-      <NavigationContainer>
-          {loginState.userToken !== null ?
-              <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
-                 <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
-                 <Drawer.Screen name = "Support" component ={SupportTabScreen} />
-                 <Drawer.Screen name = "Settings" component ={SettingsTabScreen} />
-                 <Drawer.Screen name = "Account" component ={AccountTabScreen} />
-                 <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
-                 <Drawer.Screen name = "Bookmark" component ={BookmarkTabScreen} />
-              </Drawer.Navigator>
-              :
-              <RootStackScreen />
-           }
-      </NavigationContainer>
-</AuthContext.Provider>
+ <PaperProvider theme = {CurrentTheme}>
+     <AuthContext.Provider value = {authContext}>
+          <NavigationContainer theme = {CurrentTheme}>
+              {loginState.userToken !== null ?
+                  <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
+                     <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
+                     <Drawer.Screen name = "Details" component ={DetailsTabScreen} />
+                     <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
+                     <Drawer.Screen name = "About" component ={AboutTabScreen} />
+                     <Drawer.Screen name = "Account" component ={AccountTabScreen} />
+                  </Drawer.Navigator>
+                  :
+                  <RootStackScreen />
+               }
+          </NavigationContainer>
+    </AuthContext.Provider>
+</PaperProvider>
   );
 }
 

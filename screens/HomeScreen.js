@@ -1,49 +1,20 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import LoginScreen from './LoginScreen.js';
 import { getUsers } from '../api/mock.js';
 import {createDrawerNavigator, openDrawer, closeDrawer } from '@react-navigation/drawer';
 
-export default class HomeScreen extends React.Component {
-  state = { users: [], hasLoadedUsers: false, userLoadingErrorMessage: '' };
+export default function HomeScreen () {
+const theme = useTheme();
+const {colors} = useTheme()
+return (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text style = {{color: colors.text}}>HomeScreen</Text>
+  </View>
 
-  loadUsers() {
-    this.setState({ hasLoadedUsers: false, userLoadingErrorMessage: '' });
-    getUsers()
-      .then((res) =>
-        this.setState({
-          hasLoadedUsers: true,
-          users: res.users,
-        }),
-      )
-      .catch(this.handleUserLoadingError);
-  }
+);
 
-  handleUserLoadingError = (res) => {
-    if (res.error === 401) {
-      this.props.navigation.navigate('LoginScreen');
-    } else {
-      this.setState({
-        hasLoadedUsers: false,
-        userLoadingErrorMessage: res.message,
-      });
-    }
-  }
-
-  componentDidMount() {
-    this.loadUsers();
-  }
-
-  render() {
-    return (
-
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>HomeScreen</Text>
-      </View>
-
-    );
-  }
 }
 
 /*
