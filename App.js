@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useMemo} from 'react';
 import { StyleSheet, Text, View, useState, ActivityIndicator } from 'react-native';
-import { NavigationContainer, useNavigation, DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
+import { NavigationContainer, useNavigation, DefaultTheme as NavDefaultTheme, DarkTheme as NavDarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createDrawerNavigator, openDrawer, toggleDrawer } from '@react-navigation/drawer';
 import { DrawerContent } from './screens/DrawerContent';
@@ -17,10 +17,9 @@ import Account from './screens/Account.js';
 import Bookmark from './screens/Bookmark.js';
 import Settings from './screens/Settings.js';
 import Profile from './screens/Profile.js';
+import DetailsTabScreen from './screens/DetailsTabScreen.js';
+import AboutTabScreen from './screens/AboutTabScreen.js';
 import AccountTabScreen from './screens/AccountTabScreen.js';
-import BookmarkTabScreen from './screens/BookmarksTabScreen.js';
-import SupportTabScreen from './screens/SupportTabScreen.js';
-import SettingsTabScreen from './screens/SettingsTabScreen.js';
 import ProfileTabScreen from './screens/ProfileTabScreen.js';
 import RootStackScreen from './screens/RootStackScreen.js';
 import { AuthContext } from './components/AuthContext.js';
@@ -35,34 +34,37 @@ export default function App() {
 //const [ userToken, setUserToken ] = React.useState(null);
 
 const CustomDefaultTheme = {
-    ...NavigationDefaultTheme,
+    ...NavDefaultTheme,
     ...PaperDefaultTheme,
     colors:{
-        ...NavigationDefaultTheme.colors,
+        ...NavDefaultTheme.colors,
         ...PaperDefaultTheme.colors,
-        background: '#ffffff',
-        text: '#333333'
+        background: '#FFFFFF',
+        text: '#333333',
     },
 }
 
 const CustomDarkTheme = {
-    ...NavigationDarkTheme,
+    ...NavDarkTheme,
     ...PaperDarkTheme,
     colors:{
-        ...NavigationDarkTheme.colors,
+        ...NavDarkTheme.colors,
         ...PaperDarkTheme.colors,
         background: '#333333',
         text: '#ffffff',
-    }
+        bar: '#000000',
+    },
 }
 
 const [ theme, setTheme ] = React.useState(true);
-const CurrentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
+
+const CurrentTheme = theme? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLoginState = {
 isLoading: true,
 userName: null,
 userToken: null,
+password: '',
 }
 
 //reducer
@@ -80,6 +82,7 @@ const loginReducer = (prevState, action) =>{
                 userName: action.id,
                 userToken: action.token,
                 isLoading: false,
+                password: action.pass,
             };
         case 'LOGOUT':
             return{
@@ -102,23 +105,15 @@ const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState)
 
 //any line that is commented out in this block of code means that it once had a purpose, but is now obsolete
 const authContext = React.useMemo(() =>({
-signIn: async (username, password) => {
-   // setUserToken('asdf');
-    //setIsLoading(false);
-    let userToken;
-    //userName = null;
-    if( username == 'user' && password == 'pass' ){
-        userToken = 'asdf';
-    }
-    else
-        userToken = null;
+signIn: async (foundUser) => {
 
+    let userToken = foundUser.userToken;
     try{
         await AsyncStorage.setItem('userToken', userToken)
     } catch (e){
         alert(e)
     }
-    dispatch ({type: 'LOGIN', id: username, token: userToken, });
+    dispatch ({type: 'LOGIN', id: foundUser.username, token: userToken, pass: foundUser.password });
 },
 signOut: async () =>{
 //    setUserToken(null);
@@ -137,7 +132,7 @@ signUp: () =>{
 },
 toggleTheme: ()=>{
     setTheme(theme => !theme)
-}
+},
 
 }),[]);
 //you put the empty array in the end of useMemo so this whole block of code doesn't have to run everytime
@@ -165,24 +160,23 @@ return(
 }
 
   return (
-   <PaperProvider theme = {CurrentTheme}>
+ <PaperProvider theme = {CurrentTheme}>
      <AuthContext.Provider value = {authContext}>
           <NavigationContainer theme = {CurrentTheme}>
               {loginState.userToken !== null ?
                   <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
                      <Drawer.Screen name = "HomeDrawer" component ={MainTabScreen} />
-                     <Drawer.Screen name = "Support" component ={SupportTabScreen} />
-                     <Drawer.Screen name = "Settings" component ={SettingsTabScreen} />
-                     <Drawer.Screen name = "Account" component ={AccountTabScreen} />
+                     <Drawer.Screen name = "Details" component ={DetailsTabScreen} />
                      <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
-                     <Drawer.Screen name = "Bookmark" component ={BookmarkTabScreen} />
+                     <Drawer.Screen name = "About" component ={AboutTabScreen} />
+                     <Drawer.Screen name = "Account" component ={AccountTabScreen} />
                   </Drawer.Navigator>
                   :
                   <RootStackScreen />
                }
           </NavigationContainer>
     </AuthContext.Provider>
-  </PaperProvider>
+</PaperProvider>
   );
 }
 

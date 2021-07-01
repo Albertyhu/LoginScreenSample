@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {
     Avatar,
     Title,
@@ -20,6 +20,7 @@ import Bookmark from './Bookmark.js';
 import Settings from './Settings.js';
 import Support from './Support.js';
 import Profile from './Profile.js';
+import Details from './DetailScreen.js';
 import { AuthContext } from '../components/AuthContext.js';
 
 export function DrawerContent(props) {
@@ -65,10 +66,44 @@ return(
                           label="Home"
                           onPress = {() => {props.navigation.navigate('Home')}}
                     />
+                      <DrawerItem
+                        icon={({color, size}) => (
+                            <Icon
+                                name='scan-circle-outline'
+                                color={color}
+                                size={size}
+                            />
+                        )}
+                          label="Details"
+                          onPress = {() => {props.navigation.navigate('Details')}}
+                    />
                     <DrawerItem
                         icon={({color, size}) => (
                             <Icon
-                                name='account-outline'
+                                name='ios-person'
+                                color={color}
+                                size={size}
+                            />
+                        )}
+                          label="Profile"
+                          onPress = {() => {props.navigation.navigate('Profile')}}
+                          />
+                    <DrawerItem
+                        icon={({color, size}) => (
+                            <Icon
+                                name='albums-outline'
+                                color={color}
+                                size={size}
+                            />
+                        )}
+                          label="About"
+                          onPress = {() => {props.navigation.navigate('About')}}
+                    />
+
+                    <DrawerItem
+                        icon={({color, size}) => (
+                            <Icon
+                                name='color-filter-outline'
                                 color={color}
                                 size={size}
                             />
@@ -76,43 +111,12 @@ return(
                           label="Accounts"
                           onPress = {() => {props.navigation.navigate('Account')}}
                     />
-                    <DrawerItem
-                        icon={({color, size}) => (
-                            <Icon
-                                name='file-settings-outline'
-                                color={color}
-                                size={size}
-                            />
-                        )}
-                          label="Settings"
-                          onPress = {() => {props.navigation.navigate('Settings')}}
-                    />
-                    <DrawerItem
-                        icon={({color, size}) => (
-                            <Icon
-                                name='bookmark-outline'
-                                color={color}
-                                size={size}
-                            />
-                        )}
-                          label="Bookmarks"
-                          onPress = {() => {props.navigation.navigate('Bookmark')}}
-                    />
-                   <DrawerItem
-                            icon={({color, size}) => (
-                                <Icon
-                                    name='account-check-outline'
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                              label="Support"
-                              onPress = {() => {props.navigation.navigate('Support')}}
-                        />
+                </Drawer.Section>
+                <Drawer.Section>
                    <DrawerItem
                         icon={({color, size}) => (
                             <Icon
-                                name='exit-to-app'
+                                name='exit-outline'
                                 color={color}
                                 size={size}
                             />

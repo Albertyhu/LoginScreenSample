@@ -9,6 +9,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Home from './HomeScreen.js';
 import SignUpScreen from './SignUpScreen.js';
 import {AuthContext} from '../components/AuthContext.js';
+import User from '../model/users.js';
 
 const SignIn = ({navigation}) => {
 
@@ -19,6 +20,17 @@ const [data, setData] = React.useState({
     secureTextEntry: true,
     emailIsValid: false,
 })
+
+const Row = props =>{
+return(
+<View style = {{bottomMargin: 10,}}>
+    <Text>{props.username}</Text>
+    <Text>{props.email}</Text>
+    <Text>{props.password}</Text>
+    <Text>{'\n'}</Text>
+</View>
+)
+}
 
 const { signIn } = React.useContext(AuthContext);
 
@@ -35,6 +47,29 @@ setData({
 password: val,
 check_textInputChange: false,
 })
+}
+
+const handleLogin = () =>{
+if(data.email !== 0 && data.password !== 0){
+    let token;
+    const foundUser = User.filter(item => {
+        return ((item.username === data.email || item.email === data.email) && item.password === data.password)
+    })
+    if(foundUser.length === 0){
+        alert('Error: Username, email or password is incorrect.')
+        return;
+    }
+    signIn(foundUser);
+}
+else if (data.login.length === 0 && data.password.length !== 0){
+    alert("Error: Username field must not be empty")
+}
+else if (data.login.length !== 0 && data.password.length === 0){
+    alert("Error: Password field must not be empty.");
+}
+else if(data.login.length === 0 && data.password.length === 0){
+    alert("Error: Username and password fields cannot by empty.")
+}
 }
 
 const ToggleSecureTextEntry = () =>{
@@ -112,9 +147,7 @@ return(
                           size={20}
                       />
                       </Animatable.View>
-
                 }
-
               </View>
          </View>
          <View style={styles.action}>
@@ -161,7 +194,7 @@ return(
            <View style = {{flex: 1}}>
               <TouchableOpacity
                 style = {{flex: 1,paddingHorizontal: 30, paddingVertical: 20}}
-                onPress = {() => {signIn(data.email, data.password)} }>
+                onPress = {handleLogin}>
                 <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}
                     style={styles.signIn}
@@ -207,6 +240,7 @@ return(
               </TouchableOpacity>
              </View>
     </View>
+
 </View>
 )
 }
