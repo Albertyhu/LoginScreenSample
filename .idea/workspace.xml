@@ -16,7 +16,7 @@
     <list default="true" id="949ad232-8cf8-45ed-b19b-46e833fc32d5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/SignInScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SignInScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/DrawerContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/DrawerContent.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

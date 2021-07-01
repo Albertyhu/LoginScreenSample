@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useMemo} from 'react';
 import { StyleSheet, Text, View, useState, ActivityIndicator } from 'react-native';
-import { NavigationContainer, useNavigation, DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
+import { NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createDrawerNavigator, openDrawer, toggleDrawer } from '@react-navigation/drawer';
 import { DrawerContent } from './screens/DrawerContent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DefaultTheme as PaperDefaultTheme, DarkTheme as PaperDarkTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import Home from './screens/HomeScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
@@ -34,30 +33,6 @@ export default function App() {
 //const [ isLoading, setIsLoading] = React.useState(true);
 //const [ userToken, setUserToken ] = React.useState(null);
 
-const CustomDefaultTheme = {
-    ...NavigationDefaultTheme,
-    ...PaperDefaultTheme,
-    colors:{
-        ...NavigationDefaultTheme.colors,
-        ...PaperDefaultTheme.colors,
-        background: '#ffffff',
-        text: '#333333'
-    },
-}
-
-const CustomDarkTheme = {
-    ...NavigationDarkTheme,
-    ...PaperDarkTheme,
-    colors:{
-        ...NavigationDarkTheme.colors,
-        ...PaperDarkTheme.colors,
-        background: '#333333',
-        text: '#ffffff',
-    }
-}
-
-const [ theme, setTheme ] = React.useState(true);
-const CurrentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLoginState = {
 isLoading: true,
@@ -129,9 +104,7 @@ signUp: () =>{
 //    setUserToken('asdf');
     setIsLoading(false);
 },
-toggleTheme: ()=>{
-    setTheme(theme => !theme)
-}
+
 
 }),[]);
 //you put the empty array in the end of useMemo so this whole block of code doesn't have to run everytime

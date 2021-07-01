@@ -11,7 +11,7 @@ import {
     Text,
     TouchableRipple,
     Switch,
-    useTheme,
+
 } from 'react-native-paper';
 
 import Home from './HomeScreen.js';
@@ -24,8 +24,6 @@ import { AuthContext } from '../components/AuthContext.js';
 
 export function DrawerContent(props) {
 const { signOut } = React.useContext(AuthContext);
-const { toggleTheme } = React.useContext(AuthContext);
-const PaperTheme = useTheme();
 
 return(
     <View>
@@ -122,11 +120,11 @@ return(
                     />
                 </Drawer.Section>
                 <Drawer.Section title="Preferences">
-                    <TouchableRipple onPress = {toggleTheme}>
+                    <TouchableRipple onPress = {}>
                         <View style = {styles.preference}>
                             <Text>Dark Theme</Text>
                             <View pointerEvents='none'>
-                                <Switch value = {PaperTheme.dark} />
+                                <Switch value = {} />
                             </View>
                         </View>
                     </TouchableRipple>
