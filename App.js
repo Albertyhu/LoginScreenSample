@@ -41,6 +41,8 @@ const CustomDefaultTheme = {
         ...PaperDefaultTheme.colors,
         background: '#FFFFFF',
         text: '#333333',
+        SignInBackground: '#009387',
+        signInButtonGradient: ['#08d4c4', '#01ab9d'],
     },
 }
 
@@ -53,6 +55,8 @@ const CustomDarkTheme = {
         background: '#333333',
         text: '#ffffff',
         bar: '#000000',
+        SignInBackground: '#333333',
+        signInButtonGradient: ['#333333', '#000000'],
     },
 }
 

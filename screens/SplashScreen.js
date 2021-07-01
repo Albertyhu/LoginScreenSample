@@ -7,8 +7,10 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import SignInScreen from './SignInScreen.js';
 
 const SplashScreen = ({navigation}) =>{
+const {colors} = useTheme();
+
 return(
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.SignInBackground}]}>
         <View style = {styles.header}>
             <Animatable.Image
             animation = 'bounceInDown'
@@ -21,8 +23,9 @@ return(
             style = {styles.footer}
             animation='fadeInUpBig'
         >
-            <Text>Stay connected with everyone!</Text>
-            <Text>Sign into your account</Text>
+            <Text style = {[styles.title, {paddingBottom: 5,}]}>Welcome</Text>
+            <Text style = {{paddingBottom: 5,}}>Stay connected with everyone!</Text>
+            <Text style = {{paddingBottom: 5,}}>Sign into your account</Text>
             <TouchableOpacity style = {{flex: 1,}} onPress = {() => navigation.navigate('SignInScreen')}>
                 <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}
@@ -49,7 +52,7 @@ const height_logo = height * 0.28;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#009387'
+    backgroundColor: '#009387',
   },
   header: {
       flex: 2,
@@ -62,7 +65,9 @@ const styles = StyleSheet.create({
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
       paddingVertical: 50,
-      paddingHorizontal: 30
+      paddingHorizontal: 30,
+      justifyContent: 'center',
+      alignItems: 'center',
   },
   logo: {
       width: height_logo,

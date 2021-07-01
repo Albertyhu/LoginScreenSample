@@ -22,9 +22,10 @@ const rootStackNavigator = createStackNavigator();
 const RootStackScreen = () => {
 return(
 <rootStackNavigator.Navigator>
+    <rootStackNavigator.Screen name = 'SignUpScreen' component = {SignUp} options = {{title: 'Sign Up', headerShown: false}}/>
+    <rootStackNavigator.Screen name = 'SplashScreen' component = {SplashScreen} options={{title: 'Loading', headerShown: false,}}/>
     <rootStackNavigator.Screen name = 'SignInScreen' component = {SignInScreen} options = {{title: 'Sign In', headerShown: false}}/>
-    <rootStackNavigator.Screen name = 'SignUpScreen' component = {SignUp} options = {{title: 'Sign Up'}}/>
-    <rootStackNavigator.Screen name = 'SplashScreen' component = {SplashScreen} options={{title: 'Loading'}}/>
+
 </rootStackNavigator.Navigator>
 )
 }

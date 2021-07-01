@@ -5,11 +5,13 @@ import Feather from 'react-native-vector-icons/Feather';
 import {LinearGradient} from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTheme } from '@react-navigation/native';
 
 import Home from './HomeScreen.js';
 import SignInScreen from './SignInScreen.js';
 
 const SignUp = ({navigation}) => {
+const {colors} = useTheme();
 
 const [isValid, changeValidity] = useState(false);
 
@@ -101,7 +103,7 @@ useEffect(() =>{
 )
 
 return(
-<View style = {styles.container}>
+<View style = {[styles.container, {backgroundColor: colors.SignInBackground}]}>
     <StatusBar backgroundColor = '#009387' barStyle = 'light-content'/>
 <View style = {styles.header}>
     <Text style = {styles.text_header}>Welcome</Text>
@@ -234,7 +236,7 @@ return(
            <View style = {{flex: 1}}>
               <TouchableOpacity style = {{flex: 1,paddingHorizontal: 30, paddingTop: 10}} onPress = {() => navigation.navigate('Home')} >
                 <LinearGradient
-                    colors={['#08d4c4', '#01ab9d']}
+                    colors={colors.signInButtonGradient}
                     style={styles.signIn}
                 >
                 <Text style = {styles.textSign}>Submit</Text>

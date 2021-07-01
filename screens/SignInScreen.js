@@ -5,6 +5,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import {LinearGradient} from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTheme as usePaperTheme } from 'react-native-paper';
+import { useTheme as useNavTheme } from '@react-navigation/native';
 
 import Home from './HomeScreen.js';
 import SignUpScreen from './SignUpScreen.js';
@@ -12,6 +14,9 @@ import {AuthContext} from '../components/AuthContext.js';
 import User from '../model/users.js';
 
 const SignIn = ({navigation}) => {
+
+const {colors} = useNavTheme();
+const PaperTheme = usePaperTheme();
 
 const [data, setData] = React.useState({
     email: '',
@@ -105,7 +110,7 @@ useEffect(() => {
 }, [data.email]);
 
 return(
-<View style = {styles.container}>
+<View style = {[styles.container, {backgroundColor: colors.SignInBackground}]}>
     <StatusBar backgroundColor = '#009387' barStyle = 'light-content'/>
 <View style = {styles.header}>
     <Text style = {styles.text_header}>Welcome</Text>
@@ -196,7 +201,7 @@ return(
                 style = {{flex: 1,paddingHorizontal: 30, paddingVertical: 20}}
                 onPress = {handleLogin}>
                 <LinearGradient
-                    colors={['#08d4c4', '#01ab9d']}
+                    colors={colors.signInButtonGradient}
                     style={styles.signIn}
                 >
                 <Text style = {styles.textSign}>Sign In</Text>
@@ -251,7 +256,7 @@ export default SignIn;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#009387'
+      backgroundColor: '#009387',
     },
     header: {
         flex: 1,
