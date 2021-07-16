@@ -25,6 +25,7 @@ import RootStackScreen from './screens/RootStackScreen.js';
 import { AuthContext } from './components/AuthContext.js';
 import SettingsDrawer from './screens/SettingsDrawer.js';
 import User from './model/users.js';
+import EditProfile from './screens/EditProfileScreen.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -43,6 +44,10 @@ const CustomDefaultTheme = {
         text: '#333333',
         SignInBackground: '#009387',
         signInButtonGradient: ['#08d4c4', '#01ab9d'],
+        editButtonGradient: ['#fcc700', '#fc9500'],
+        editButtonText: '#ffffff',
+        editBackground: '#009387',
+
     },
 }
 
@@ -57,6 +62,9 @@ const CustomDarkTheme = {
         bar: '#000000',
         SignInBackground: '#333333',
         signInButtonGradient: ['#333333', '#000000'],
+        editButtonGradient: ['#fff', '#b7b7b7'],
+        editButtonText: '#000000',
+        editBackground: '#000000',
     },
 }
 
@@ -108,6 +116,7 @@ const loginReducer = (prevState, action) =>{
 const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
 //any line that is commented out in this block of code means that it once had a purpose, but is now obsolete
+//The following are also called worklets
 const authContext = React.useMemo(() =>({
 signIn: async (foundUser) => {
 
@@ -174,6 +183,7 @@ return(
                      <Drawer.Screen name = "Profile" component ={ProfileTabScreen} />
                      <Drawer.Screen name = "About" component ={AboutTabScreen} />
                      <Drawer.Screen name = "Account" component ={AccountTabScreen} />
+                     <Drawer.Screen name = "EditProfile" component ={EditProfile} />
                   </Drawer.Navigator>
                   :
                   <RootStackScreen />

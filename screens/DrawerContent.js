@@ -22,6 +22,7 @@ import Support from './Support.js';
 import Profile from './Profile.js';
 import Details from './DetailScreen.js';
 import { AuthContext } from '../components/AuthContext.js';
+import EditProfile from './EditProfileScreen.js';
 
 export function DrawerContent(props) {
 const { signOut } = React.useContext(AuthContext);
@@ -110,6 +111,20 @@ return(
                         )}
                           label="Accounts"
                           onPress = {() => {props.navigation.navigate('Account')}}
+                    />
+
+                </Drawer.Section>
+                <Drawer.Section>
+                <DrawerItem
+                        icon={({color, size}) => (
+                            <Icon
+                                name='pencil-outline'
+                                color={color}
+                                size={size}
+                            />
+                        )}
+                          label="Edit Profile"
+                          onPress = {() => {props.navigation.navigate('EditProfile')}}
                     />
                 </Drawer.Section>
                 <Drawer.Section>
